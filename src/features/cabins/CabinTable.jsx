@@ -32,13 +32,11 @@ function CabinTable() {
 	const {
 		isPending,
 		data: cabins,
-		error,
+		// error,
 	} = useQuery({
-		queryKey: ["cabin"],
+		queryKey: ["cabins"],
 		queryFn: getCabins,
 	});
-
-	console.log(cabins, error);
 
 	if (isPending) return <Spinner />;
 
