@@ -25,9 +25,10 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
 	const isWorking = isCreating || isUpdating;
 
 	const onSubmit = (data) => {
+		console.log("onSubmit initiated");
 		const image =
 			typeof data.image === "string" ? data.image : data.image[0];
-
+		console.log(isEditSession, cabinToEdit);
 		if (isEditSession)
 			updateCabin(
 				{ newCabinData: { ...data, image }, id: editId },
@@ -122,7 +123,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
 				error={errors?.description?.message}
 			>
 				<Textarea
-					type="number"
+					type="text"
 					id="description"
 					disabled={isWorking}
 					defaultValue=""
