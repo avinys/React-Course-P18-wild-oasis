@@ -57,6 +57,7 @@ const ModalContext = createContext();
 
 function Modal({ children }) {
 	const [openName, setOpenName] = useState("");
+	console.log("Modal: ", openName);
 
 	const close = () => {
 		setOpenName("");
@@ -71,6 +72,7 @@ function Modal({ children }) {
 }
 
 function Open({ children, opens: opensWindowName }) {
+	console.log("Open: opensWindowName: ", opensWindowName);
 	const { open } = useContext(ModalContext);
 
 	return cloneElement(children, { onClick: () => open(opensWindowName) });
@@ -80,7 +82,7 @@ function Window({ children, name }) {
 	const { openName, close } = useContext(ModalContext);
 
 	const ref = useOutsideClick(close);
-
+	console.log(`Window: name: ${name}, openName: ${openName}`);
 	if (name !== openName) return null;
 
 	return createPortal(
