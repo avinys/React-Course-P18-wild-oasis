@@ -7,16 +7,17 @@ import Tag from "../../ui/Tag";
 import ButtonGroup from "../../ui/ButtonGroup";
 import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
+import Spinner from "../../ui/Spinner";
+import Modal from "../../ui/Modal";
+import ConfirmDelete from "../../ui/ConfirmDelete";
+import Empty from "../../ui/Empty";
 
 import { useMoveBack } from "../../hooks/useMoveBack";
 import { useBooking } from "./useBooking";
-import Spinner from "../../ui/Spinner";
 import { useNavigate } from "react-router-dom";
 import { useCheckout } from "../check-in-out/useCheckout";
 import { HiArrowUpOnSquare } from "react-icons/hi2";
-import Modal from "../../ui/Modal";
 import { useDeleteBooking } from "./useDeleteBooking";
-import ConfirmDelete from "../../ui/ConfirmDelete";
 
 const HeadingGroup = styled.div`
 	display: flex;
@@ -25,13 +26,15 @@ const HeadingGroup = styled.div`
 `;
 
 function BookingDetail() {
-	const navigate = useNavigate();
 	const { booking, isPending } = useBooking();
 	const { checkout, isCheckingOut } = useCheckout();
 	const { isDeleting, deleteBooking } = useDeleteBooking();
+
+	const navigate = useNavigate();
 	const moveBack = useMoveBack();
 
 	if (isPending || isCheckingOut || isDeleting) return <Spinner />;
+	if (!booking) return <Empty resourceName="booking" />;
 
 	const { status, id: bookingId } = booking;
 
