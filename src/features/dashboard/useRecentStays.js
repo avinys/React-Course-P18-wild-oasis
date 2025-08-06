@@ -19,5 +19,5 @@ export function useRecentStays() {
 		(stay) => stay.status !== "unconfirmed"
 	);
 
-	return { isPending, stays, confirmedStays };
+	return { isPending, stays, confirmedStays, numDays };
 }
